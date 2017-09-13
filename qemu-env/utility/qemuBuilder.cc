@@ -32,8 +32,8 @@ qemuBuilder::qemuBuilder(ifstream & stream, char stype)
         //change to petalinux project path
 
         //build calling string
-        string qemuArgs = TO_PATH(EMU_CUR_BIN) + (string)"/qemu-patch/bin/qemu-system-aarch64"
-          + " -L " + TO_PATH(EMU_CUR_BIN)+"/qemu-patch/etc/qemu "
+        string qemuArgs = TO_PATH(EMU_CUR_BIN) + (string)"/bin/qemu-system-aarch64"
+          + " -L " + TO_PATH(EMU_CUR_BIN)+"/etc/qemu "
           + " -M arm-generic-fdt-plnx -machine linux=on   -serial /dev/null -serial mon:stdio -display none"
           + " -gdb tcp::"+ to_string(topLevel.global.gdb_port_offset+clusterId)
           + " -kernel " + TO_PATH(EMU_CUR_BIN) +"/"+ TO_PATH(PETALINUX_NAME)+"/images/linux/zImage" //FIXME set in json

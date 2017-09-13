@@ -1,15 +1,17 @@
-From 2c91e257efffb8b1c2b9537cf219bf209f04087b Mon Sep 17 00:00:00 2001
+From 42c3b6e64d93d0d4792574113f0866b92d09c141 Mon Sep 17 00:00:00 2001
 From: Baptiste <baptiste.roux@inria.fr>
-Date: Tue, 7 Mar 2017 15:08:32 +0100
+Date: Wed, 13 Sep 2017 16:36:29 +0200
 Subject: [PATCH] Enable generic emu-hmpsoc device in devices tree. Prevent
- qemu to set compatible string to invalidated.
+ qemu to set compatible string to invalidated. Change escaping rules in perl
+ script to prevent error from perl v5.26
 
 ---
- hw/core/fdt_generic_util.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ hw/core/fdt_generic_util.c | 11 ++++++++---
+ scripts/texi2pod.pl        |  2 +-
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/hw/core/fdt_generic_util.c b/hw/core/fdt_generic_util.c
-index e316ef7176..1c67768970 100644
+index e316ef7176..7f4313640f 100644
 --- a/hw/core/fdt_generic_util.c
 +++ b/hw/core/fdt_generic_util.c
 @@ -57,6 +57,7 @@
@@ -20,19 +22,57 @@ index e316ef7176..1c67768970 100644
  
  static int simple_bus_fdt_init(char *bus_node_path, FDTMachineInfo *fdti);
  
-@@ -223,6 +224,12 @@ static void fdt_init_node(void *args)
+@@ -223,6 +224,10 @@ static void fdt_init_node(void *args)
      }
  
      for (compat = all_compats; compat && compat_len; compat = next_compat+1) {
-+
-+        if (!strncmp(EMU_HMPSOC_GENERIC_COMPATIBLE, compat, 5)){ // emu-hmpsoc generic devices entry
-+            DB_PRINT_NP(0, "emu-hmpsoc generic devices found: %s\n", compat);
-+            goto exit;
-+        }
-+
++      if (!strncmp(EMU_HMPSOC_GENERIC_COMPATIBLE, compat, 5)){ // emu-hmpsoc generic devices entry
++        DB_PRINT_NP(0, "emu-hmpsoc generic devices found: %s\n", compat);
++        goto exit;
++      }
          char *compat_prefixed = g_strdup_printf("compatible:%s", compat);
          if (!fdt_init_compat(node_path, fdti, compat_prefixed)) {
              goto exit;
+@@ -1046,7 +1051,7 @@ static int fdt_init_qdev(char *node_path, FDTMachineInfo *fdti, char *compat)
+         qemu_register_reset((void (*)(void *))dc->reset, dev);
+     }
+ 
+-    if (object_dynamic_cast(dev, TYPE_SYS_BUS_DEVICE) || 
++    if (object_dynamic_cast(dev, TYPE_SYS_BUS_DEVICE) ||
+         object_dynamic_cast(dev, TYPE_FDT_GENERIC_MMAP)) {
+         FDTGenericRegPropInfo reg = {0};
+         char parent_path[DT_PATH_LENGTH];
+@@ -1104,7 +1109,7 @@ static int fdt_init_qdev(char *node_path, FDTMachineInfo *fdti, char *compat)
+                     error_free(errp);
+                     errp = NULL;
+                 }
+-                
++
+                 reg.x[i] = g_renew(uint64_t, reg.x[i], reg.n + 1);
+                 reg.x[i][reg.n] = nc ?
+                     qemu_fdt_getprop_sized_cell(fdti->fdt, node_path,
+@@ -1130,7 +1135,7 @@ exit_reg_parse:
+             }
+         }
+     }
+-    
++
+     if (object_dynamic_cast(dev, TYPE_SYS_BUS_DEVICE)) {
+         {
+             int len;
+diff --git a/scripts/texi2pod.pl b/scripts/texi2pod.pl
+index 94097fb065..8767662d30 100755
+--- a/scripts/texi2pod.pl
++++ b/scripts/texi2pod.pl
+@@ -317,7 +317,7 @@ while(<$inf>) {
+ 	@columns = ();
+ 	for $column (split (/\s*\@tab\s*/, $1)) {
+ 	    # @strong{...} is used a @headitem work-alike
+-	    $column =~ s/^\@strong{(.*)}$/$1/;
++	    $column =~ s/^\@strong\{(.*)\}$/$1/;
+ 	    push @columns, $column;
+ 	}
+ 	$_ = "\n=item ".join (" : ", @columns)."\n";
 -- 
-2.12.0
+2.14.0
 
