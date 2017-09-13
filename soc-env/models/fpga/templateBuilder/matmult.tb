@@ -1,0 +1,29 @@
+#ifndef _TB_MATMULT
+#define _TB_MATMULT
+#include <iostream>
+#define SHORT 0
+#define FLOAT 2
+#define INT 1
+#define DOUBLE 3
+hwIP* gb_matmult(std::string tplVal_0, sc_core::sc_module_name name, uint mtxMSize, uint tileMSize)
+{
+	int tplVal_0_int=
+	("short"==tplVal_0)?SHORT:("float"==tplVal_0)?FLOAT:("int"==tplVal_0)?INT:("double"==tplVal_0)?DOUBLE:0; //Error
+	if ((1==tplVal_0_int))
+	{
+		return (new matmult<int>(name, mtxMSize, tileMSize));
+	}else
+	if ((2==tplVal_0_int))
+	{
+		return (new matmult<float>(name, mtxMSize, tileMSize));
+	}else
+	if ((3==tplVal_0_int))
+	{
+		return (new matmult<double>(name, mtxMSize, tileMSize));
+	}else
+	
+	{
+		SC_REPORT_FATAL("SoCBuilder(gb_matmult)", "Unsupported Template values \n");
+	}
+}
+#endif // _TB_MATMULT

@@ -1,0 +1,1567 @@
+{
+    "global":{
+        "sk_bpath": "/tmp/emu-hmpsoc-tmp",
+        "sk_qemu": "qemu-rport-_cosim@",
+        "sk_noc": "nocIpc",
+        "ssh_port_offset": 10300,
+        "gdb_port_offset": 9000,
+        "sync_quantum": 1000000,
+        "sync_icount": 7,
+        "preBoot_ms": 1200,
+        "multiThread_sim": true,
+        "run_trace": false,
+        "fast_dbg": false
+    },
+    "noc":{
+        "topology": "TORUS_2D",
+        "xSize": 4,
+        "ySize": 2,
+        "params": {
+            "maxPacketLength": 1024,
+            "tns_atm": 500,
+            "tns_rcc": 300,
+            "tns_sbc": 4,
+            "enj_atm": 0.00000004,
+            "enj_rcc": 0.00000009,
+            "enj_sbc": 0.00000007
+        }
+    },
+    "clusters": {
+        "MasterCl": {
+            "gb_addr": "0x60000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  0,
+            "y_pos":  0,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t1_6.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "aes_t1": {
+                        "ipType": "aes",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0100",
+                        "addr_space": "0x40",
+                        "compTime_ns": 10000,
+                        "compEn_nj": 100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "viterbi_t2": {
+                        "ipType": "viterbi",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0200",
+                        "addr_space": "0x40",
+                        "compTime_ns": 20000,
+                        "compEn_nj": 200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "bfs_bulk_t3": {
+                        "ipType": "bfs_bulk",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0300",
+                        "addr_space": "0x40",
+                        "compTime_ns": 30000,
+                        "compEn_nj": 300000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "backprop_t4": {
+                        "ipType": "backprop",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0400",
+                        "addr_space": "0x40",
+                        "compTime_ns": 40000,
+                        "compEn_nj": 400000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "fft_strided_t5": {
+                        "ipType": "fft_strided",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0500",
+                        "addr_space": "0x40",
+                        "compTime_ns": 50000,
+                        "compEn_nj": 500000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "gemm_blocked_t6": {
+                        "ipType": "gemm_blocked",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0600",
+                        "addr_space": "0x40",
+                        "compTime_ns": 60000,
+                        "compEn_nj": 600000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster1": {
+            "gb_addr": "0x80000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  1,
+            "y_pos":  0,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t7_12.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "kmp_t7": {
+                        "ipType": "kmp",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0700",
+                        "addr_space": "0x40",
+                        "compTime_ns": 70000,
+                        "compEn_nj": 700000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "md_knn_t8": {
+                        "ipType": "md_knn",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0800",
+                        "addr_space": "0x40",
+                        "compTime_ns": 80000,
+                        "compEn_nj": 800000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "nw_t9": {
+                        "ipType": "nw",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0900",
+                        "addr_space": "0x40",
+                        "compTime_ns": 90000,
+                        "compEn_nj": 900000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "sort_merge_tA": {
+                        "ipType": "sort_merge",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0a00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 100000,
+                        "compEn_nj": 1000000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "stenc2d_tB": {
+                        "ipType": "stenc2d",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0b00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 110000,
+                        "compEn_nj": 1100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "spmv_crs_tC": {
+                        "ipType": "spmv_crs",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0c00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 120000,
+                        "compEn_nj": 1200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster2": {
+            "gb_addr": "0xA0000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  2,
+            "y_pos":  0,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t1_6.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "aes_t1": {
+                        "ipType": "aes",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0100",
+                        "addr_space": "0x40",
+                        "compTime_ns": 10000,
+                        "compEn_nj": 100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "viterbi_t2": {
+                        "ipType": "viterbi",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0200",
+                        "addr_space": "0x40",
+                        "compTime_ns": 20000,
+                        "compEn_nj": 200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "bfs_bulk_t3": {
+                        "ipType": "bfs_bulk",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0300",
+                        "addr_space": "0x40",
+                        "compTime_ns": 30000,
+                        "compEn_nj": 300000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "backprop_t4": {
+                        "ipType": "backprop",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0400",
+                        "addr_space": "0x40",
+                        "compTime_ns": 40000,
+                        "compEn_nj": 400000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "fft_strided_t5": {
+                        "ipType": "fft_strided",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0500",
+                        "addr_space": "0x40",
+                        "compTime_ns": 50000,
+                        "compEn_nj": 500000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "gemm_blocked_t6": {
+                        "ipType": "gemm_blocked",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0600",
+                        "addr_space": "0x40",
+                        "compTime_ns": 60000,
+                        "compEn_nj": 600000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster3": {
+            "gb_addr": "0xC0000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  3,
+            "y_pos":  0,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t7_12.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "kmp_t7": {
+                        "ipType": "kmp",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0700",
+                        "addr_space": "0x40",
+                        "compTime_ns": 70000,
+                        "compEn_nj": 700000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "md_knn_t8": {
+                        "ipType": "md_knn",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0800",
+                        "addr_space": "0x40",
+                        "compTime_ns": 80000,
+                        "compEn_nj": 800000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "nw_t9": {
+                        "ipType": "nw",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0900",
+                        "addr_space": "0x40",
+                        "compTime_ns": 90000,
+                        "compEn_nj": 900000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "sort_merge_tA": {
+                        "ipType": "sort_merge",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0a00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 100000,
+                        "compEn_nj": 1000000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "stenc2d_tB": {
+                        "ipType": "stenc2d",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0b00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 110000,
+                        "compEn_nj": 1100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "spmv_crs_tC": {
+                        "ipType": "spmv_crs",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0c00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 120000,
+                        "compEn_nj": 1200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster4": {
+            "gb_addr": "0xE0000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  3,
+            "y_pos":  1,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t1_6.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "aes_t1": {
+                        "ipType": "aes",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0100",
+                        "addr_space": "0x40",
+                        "compTime_ns": 10000,
+                        "compEn_nj": 100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "viterbi_t2": {
+                        "ipType": "viterbi",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0200",
+                        "addr_space": "0x40",
+                        "compTime_ns": 20000,
+                        "compEn_nj": 200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "bfs_bulk_t3": {
+                        "ipType": "bfs_bulk",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0300",
+                        "addr_space": "0x40",
+                        "compTime_ns": 30000,
+                        "compEn_nj": 300000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "backprop_t4": {
+                        "ipType": "backprop",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0400",
+                        "addr_space": "0x40",
+                        "compTime_ns": 40000,
+                        "compEn_nj": 400000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "fft_strided_t5": {
+                        "ipType": "fft_strided",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0500",
+                        "addr_space": "0x40",
+                        "compTime_ns": 50000,
+                        "compEn_nj": 500000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "gemm_blocked_t6": {
+                        "ipType": "gemm_blocked",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0600",
+                        "addr_space": "0x40",
+                        "compTime_ns": 60000,
+                        "compEn_nj": 600000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster5": {
+            "gb_addr": "0x100000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  2,
+            "y_pos":  1,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t7_12.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "kmp_t7": {
+                        "ipType": "kmp",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0700",
+                        "addr_space": "0x40",
+                        "compTime_ns": 70000,
+                        "compEn_nj": 700000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "md_knn_t8": {
+                        "ipType": "md_knn",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0800",
+                        "addr_space": "0x40",
+                        "compTime_ns": 80000,
+                        "compEn_nj": 800000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "nw_t9": {
+                        "ipType": "nw",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0900",
+                        "addr_space": "0x40",
+                        "compTime_ns": 90000,
+                        "compEn_nj": 900000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "sort_merge_tA": {
+                        "ipType": "sort_merge",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0a00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 100000,
+                        "compEn_nj": 1000000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "stenc2d_tB": {
+                        "ipType": "stenc2d",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0b00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 110000,
+                        "compEn_nj": 1100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "spmv_crs_tC": {
+                        "ipType": "spmv_crs",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0c00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 120000,
+                        "compEn_nj": 1200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster6": {
+            "gb_addr": "0x120000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  1,
+            "y_pos":  1,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t1_6.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "aes_t1": {
+                        "ipType": "aes",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0100",
+                        "addr_space": "0x40",
+                        "compTime_ns": 10000,
+                        "compEn_nj": 100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "viterbi_t2": {
+                        "ipType": "viterbi",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0200",
+                        "addr_space": "0x40",
+                        "compTime_ns": 20000,
+                        "compEn_nj": 200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "bfs_bulk_t3": {
+                        "ipType": "bfs_bulk",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0300",
+                        "addr_space": "0x40",
+                        "compTime_ns": 30000,
+                        "compEn_nj": 300000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "backprop_t4": {
+                        "ipType": "backprop",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0400",
+                        "addr_space": "0x40",
+                        "compTime_ns": 40000,
+                        "compEn_nj": 400000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "fft_strided_t5": {
+                        "ipType": "fft_strided",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0500",
+                        "addr_space": "0x40",
+                        "compTime_ns": 50000,
+                        "compEn_nj": 500000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "gemm_blocked_t6": {
+                        "ipType": "gemm_blocked",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0600",
+                        "addr_space": "0x40",
+                        "compTime_ns": 60000,
+                        "compEn_nj": 600000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slaveCluster7": {
+            "gb_addr": "0x140000000",
+            "ms_addr": "0x5fff0000",
+            "gt_addr": "0x5ffef000",
+            "noc_addr": "0x5ffe0000",
+            "x_pos":  0,
+            "y_pos":  1,
+            "cpu": {
+                "dtb_name": "emu-hmpsoc_t7_12.dtb"
+            },
+            "memory": {
+                "addr_offset": "0x40000000",
+                "addr_space": "0x1f000000",
+                "latency_ns": 500,
+                "HPx": 6,
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 256,
+                        "engS": 0.000000008,
+                        "engD": 0.0000000008,
+                        "timeS_ns": 600,
+                        "timeD_ns": 10
+                    },
+                    "HPx_1": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_2": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_3": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_4": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_5": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    },
+                    "HPx_6": {
+                        "maxBurst": 256,
+                        "engS": 0.000000009,
+                        "engD": 0.0000000001,
+                        "timeS_ns": 800,
+                        "timeD_ns": 7
+                    }
+                }
+
+            },
+            "ambaGP": {
+                "addr_offset": "0x5f000000",
+                "addr_space":  "0xfdffff",
+                "comChan": {
+                    "cpu": {
+                        "maxBurst": 8,
+                        "engS": 0,
+                        "engD": 0.000000006,
+                        "timeS_ns": 0,
+                        "timeD_ns": 400
+                    }
+                },
+                "hwCpn": {
+                    "kmp_t7": {
+                        "ipType": "kmp",
+                        "hpx_id": 0,
+                        "irq_id": 0,
+                        "addr_offset": "0x0700",
+                        "addr_space": "0x40",
+                        "compTime_ns": 70000,
+                        "compEn_nj": 700000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "md_knn_t8": {
+                        "ipType": "md_knn",
+                        "hpx_id": 1,
+                        "irq_id": 1,
+                        "addr_offset": "0x0800",
+                        "addr_space": "0x40",
+                        "compTime_ns": 80000,
+                        "compEn_nj": 800000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "nw_t9": {
+                        "ipType": "nw",
+                        "hpx_id": 2,
+                        "irq_id": 2,
+                        "addr_offset": "0x0900",
+                        "addr_space": "0x40",
+                        "compTime_ns": 90000,
+                        "compEn_nj": 900000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "sort_merge_tA": {
+                        "ipType": "sort_merge",
+                        "hpx_id": 3,
+                        "irq_id": 3,
+                        "addr_offset": "0x0a00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 100000,
+                        "compEn_nj": 1000000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "stenc2d_tB": {
+                        "ipType": "stenc2d",
+                        "hpx_id": 4,
+                        "irq_id": 4,
+                        "addr_offset": "0x0b00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 110000,
+                        "compEn_nj": 1100000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    },
+                    "spmv_crs_tC": {
+                        "ipType": "spmv_crs",
+                        "hpx_id": 5,
+                        "irq_id": 5,
+                        "addr_offset": "0x0c00",
+                        "addr_space": "0x40",
+                        "compTime_ns": 120000,
+                        "compEn_nj": 1200000,
+                        "comChan": {
+                            "amba": {
+                                "maxBurst": 8,
+                                "engS": 0.0,
+                                "engD": 0.000000002,
+                                "timeS_ns": 0,
+                                "timeD_ns": 200
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+### ignored file for HMpSoC virtual platform project
+
+### CMake ###
+CMakeCache.txt
+CMakeFiles
+*-build/Makefile
+cmake_install.cmake
+install_manifest.txt
+CPackSourceConfig.cmake
+CPackConfig.cmake
+
+### Output ###
+build/
+*-build/
+build-*/
+*.o
+*.so
+*.build/
+*.dtb
+output/
+msConf_*.json
+*.pro*
+
+#sandbox 
+sandbox/
+
+# IDE feature with c-c++ layer ans ycmd
+*.clang_complete
