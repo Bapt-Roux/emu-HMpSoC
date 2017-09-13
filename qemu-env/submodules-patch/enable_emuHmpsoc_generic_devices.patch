@@ -1,0 +1,38 @@
+From 2c91e257efffb8b1c2b9537cf219bf209f04087b Mon Sep 17 00:00:00 2001
+From: Baptiste <baptiste.roux@inria.fr>
+Date: Tue, 7 Mar 2017 15:08:32 +0100
+Subject: [PATCH] Enable generic emu-hmpsoc device in devices tree. Prevent
+ qemu to set compatible string to invalidated.
+
+---
+ hw/core/fdt_generic_util.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/hw/core/fdt_generic_util.c b/hw/core/fdt_generic_util.c
+index e316ef7176..1c67768970 100644
+--- a/hw/core/fdt_generic_util.c
++++ b/hw/core/fdt_generic_util.c
+@@ -57,6 +57,7 @@
+ 
+ #include <libfdt.h>
+ #include <stdlib.h>
++#define EMU_HMPSOC_GENERIC_COMPATIBLE "emu-hmpsoc,"
+ 
+ static int simple_bus_fdt_init(char *bus_node_path, FDTMachineInfo *fdti);
+ 
+@@ -223,6 +224,12 @@ static void fdt_init_node(void *args)
+     }
+ 
+     for (compat = all_compats; compat && compat_len; compat = next_compat+1) {
++
++        if (!strncmp(EMU_HMPSOC_GENERIC_COMPATIBLE, compat, 5)){ // emu-hmpsoc generic devices entry
++            DB_PRINT_NP(0, "emu-hmpsoc generic devices found: %s\n", compat);
++            goto exit;
++        }
++
+         char *compat_prefixed = g_strdup_printf("compatible:%s", compat);
+         if (!fdt_init_compat(node_path, fdti, compat_prefixed)) {
+             goto exit;
+-- 
+2.12.0
+

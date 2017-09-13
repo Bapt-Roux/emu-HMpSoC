@@ -1,0 +1,106 @@
+/*
+* This file describe cluster interface and monitored memory components
+*/
+
+/ {
+    /* emu_hmpsoc { */
+      #address-cells = <0x1>;
+      #size-cells = <0x1>;
+
+      sc_space{
+        device_type = "systemC-addr-space";
+        addr_base = <0x30000000>;
+        addr_size = <0x40000000>;
+      };
+
+      sc_noc{
+        compatible = "emu-hmpsoc,nocIpc-1.0";
+        reg = <0x5ffe0000UL 0x006F>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 29 0x4 0x0 30 0x4>;
+        fifo-size= <0x40>;
+        dev-name = "sc_noc";
+      };
+
+      monMemory{
+        compatible = "emu-hmpsoc,monAlloc-1.0";
+        reg = <0x40000000 0x1f000000>;
+        chunk-size = <0x1000>;
+        dev-name = "sc_memory";
+      };
+
+      sc_aes{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000100UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 31 0x4>;
+        dev-name = "sc_aes";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+      sc_viterbi{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000200UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 32 0x4>;
+        dev-name = "sc_viterbi";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+      sc_bfs_bulk{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000300UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 33 0x4>;
+        dev-name = "sc_bbulk";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+      sc_backprop{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000400UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 34 0x4>;
+        dev-name = "sc_backprop";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+      sc_fft_strided{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000500UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 35 0x4>;
+        dev-name = "sc_fftS";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+      sc_gemm_blocked{
+        compatible = "emu-hmpsoc,genIp-1.0";
+        reg = <0x5f000600UL 0x0040>;
+        interrupt-parent = <&intc>;
+        interrupts = <0x0 36 0x4>;
+        dev-name = "sc_gemmB";
+        nb-params = <1>;
+        nb-arrayIn = <1>;
+        nb-arrayOut = <1>;
+
+      };
+
+
+	  };
+  /* }; */
