@@ -26,3 +26,14 @@ ExternalProject_Add( vp_launcher
   INSTALL_COMMAND ""
   CMAKE_ARGS -DEMU_TOP_DIR=${CMAKE_SOURCE_DIR} -DEMU_TOP_BIN=${CMAKE_BINARY_DIR} -DPETALINUX_PREFIX=${PETALINUX_PREFIX} -DPETALINUX_NAME=${PETALINUX_NAME}
   )
+
+### apps-env sub-project as vp_apps
+# Target disable in default list: required extra dependencies
+# you could use the released binaries instead.
+ExternalProject_Add( vp_apps
+  SOURCE_DIR ${CMAKE_SOURCE_DIR}/apps-env
+  BINARY_DIR ${CMAKE_BINARY_DIR}/apps-env
+  INSTALL_COMMAND ""
+  CMAKE_ARGS -DEMU_TOP_DIR=${CMAKE_SOURCE_DIR} -DEMU_TOP_BIN=${CMAKE_BINARY_DIR} -DPETALINUX_PREFIX=${PETALINUX_PREFIX} -DPETALINUX_NAME=${PETALINUX_NAME}
+  )
+set_target_properties(vp_apps PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)

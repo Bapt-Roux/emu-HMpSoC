@@ -1,0 +1,8 @@
+#List of target for Kbuild
+obj-m := drv_monAlloc.o drv_noc.o drv_genIp.o
+
+ifdef SRC_DIR
+src := $(SRC_DIR)
+else
+src := $(obj)
+endif
