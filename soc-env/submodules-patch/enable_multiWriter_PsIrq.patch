@@ -1,0 +1,26 @@
+From 003e65955dcd65f6c552a7ad72839e077cf402ea Mon Sep 17 00:00:00 2001
+From: Baptiste <baptiste.roux@inria.fr>
+Date: Wed, 13 Sep 2017 14:19:54 +0200
+Subject: [PATCH] Enable multiwriter on PS irq pin. This enable to connect
+ multiple HW ip on the irq fabric.
+
+---
+ zynq/xilinx-zynq.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/zynq/xilinx-zynq.h b/zynq/xilinx-zynq.h
+index c17ef21..7bb1690 100644
+--- a/zynq/xilinx-zynq.h
++++ b/zynq/xilinx-zynq.h
+@@ -95,7 +95,7 @@ public:
+ 	tlm_utils::simple_target_socket<remoteport_tlm_memory_slave> *s_axi_acp;
+ 
+ 	/* PL (fabric) to PS interrupt signals.  */
+-	sc_vector<sc_signal<bool> > pl2ps_irq;
++    sc_vector<sc_signal<bool, SC_MANY_WRITERS> > pl2ps_irq;
+ 
+ 	/* PS to PL Interrupt signals.  */
+ 	sc_vector<sc_signal<bool> > ps2pl_irq;
+-- 
+2.14.0
+

@@ -80,6 +80,14 @@ add_library(LIB_SCTLMSOC OBJECT ${SRC_SCTLMSOC_ZYNQ} ${SRC_SCTLMSOC_RP_CC} ${SRC
 ###
 # Settings executable build
 ##############################
+### Extra target for patching libsystemctlm-soc submodules
+add_custom_target( patch_libsystemctlm-soc
+  COMMAND cd ${SCTLMSOC_LIB_DIRS} && git apply --check ${CMAKE_CURRENT_SOURCE_DIR}/submodules-patch/enable_multiWriter_PsIrq.patch && git am --signoff <${CMAKE_CURRENT_SOURCE_DIR}/submodules-patch/enable_multiWriter_PsIrq.patch
+   )
+# This patch command need to be applied manually
+set_target_properties(patch_libsystemctlm-soc PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
+
+
 ## Include directories
 include_directories(${EXTERNAL_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR} ${SCTLMSOC_INCLUDE_DIRS})
 
@@ -87,6 +95,7 @@ include_directories(${EXTERNAL_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR} ${SCTLMSOC_INCL
 add_executable(vp_mainFm $<TARGET_OBJECTS:LIB_SCTLMSOC> $<TARGET_OBJECTS:MODELS_MONSYSTEM> $<TARGET_OBJECTS:MODELS_STRUCT> $<TARGET_OBJECTS:MODELS_NOC> $<TARGET_OBJECTS:MODELS_FPGA> $<TARGET_OBJECTS:MACHSUITE_KER> $<TARGET_OBJECTS:MACHSUITE_HWS> $<TARGET_OBJECTS:MODELS_UTILITY> vp_mainFm.cc)
 target_link_libraries(vp_mainFm ${SystemC_LIBRARIES} pthread dl rt)
 install(TARGETS vp_mainFm DESTINATION bin)
+
 
 ###
 # Generate Doxygen documentation
