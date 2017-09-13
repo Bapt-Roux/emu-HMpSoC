@@ -1,0 +1,4 @@
+[submodule "xilinx/libsystemctlm-soc"]
+	path = soc-env/libsystemctlm-soc
+	url = https://github.com/Xilinx/libsystemctlm-soc
+	branch = master
