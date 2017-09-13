@@ -2,3 +2,7 @@
 	path = soc-env/libsystemctlm-soc
 	url = https://github.com/Xilinx/libsystemctlm-soc
 	branch = master
+[submodule "libcereal"]
+	path = soc-env/libcereal
+	url = https://github.com/USCilab/cereal
+	branch = master
